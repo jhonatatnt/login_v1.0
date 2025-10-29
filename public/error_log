@@ -1,0 +1,2 @@
+[16-Oct-2025 04:19:41 UTC] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home2/jhona980/public_html/sygest/storage/framework/views/ed4ed062a72541c580bd3cbfdf7001eb.php on line 356
+[16-Oct-2025 04:30:22 UTC] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home2/jhona980/public_html/sygest/storage/framework/views/ed4ed062a72541c580bd3cbfdf7001eb.php on line 200
