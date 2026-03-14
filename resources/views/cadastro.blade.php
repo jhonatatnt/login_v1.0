@@ -27,12 +27,19 @@
       </div>
 
       <div class="form-group">
-        <label for="last_name">Sobrenome</label>
-        @error('last_name')
-          <p class="field_error"> {{ $message }}</p>
-        @enderror
-        <input type="text" id="last_name" name="last_name" value="{{old('last_name')}}" class="@error('last_name') field_error @enderror">
-      </div>
+          <label for="lastname">Sobrenome</label>
+        
+          @error('lastname')
+            <p class="field_error">{{ $message }}</p>
+          @enderror
+        
+          <input 
+              type="text" 
+              id="lastname" 
+              name="lastname" 
+              value="{{ old('lastname') }}" 
+              class="@error('lastname') field_error @enderror">
+        </div>
 
       <div class="form-group">
         <label for="password">Senha</label>

@@ -6,31 +6,65 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
+        /*
+        |--------------------------------------------------------------------------
+        | USERS
+        |--------------------------------------------------------------------------
+        */
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+
+            // ID personalizado
+            $table->id('id_user');
+
+            // Dados pessoais
             $table->string('name', 200);
-            $table->string('last_name', 200);
-            $table->string('email',200)->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password', 300);
+            $table->string('lastname', 200);
+
+            // Autenticação
+            $table->string('email', 200)->unique();
+            $table->string('password');
+
+            // Confirmação de e-mail
+            // sim / nao
+            $table->string('confirm_email', 3)->default('nao');
+
+            // Perfil do usuário
+            // 0 = comum | 1 = operador | 2 = admin | 3 = super admin
+            $table->tinyInteger('role_user')->default(0);
+
+            // Data de criação automática
+            $table->timestamp('date_creation')->useCurrent();
+
+            // Campos usados pelo Laravel (opcional, mas recomendado)
             $table->rememberToken();
-            $table->timestamps();
         });
 
+        /*
+        |--------------------------------------------------------------------------
+        | PASSWORD RESET TOKENS
+        |--------------------------------------------------------------------------
+        */
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
+            $table->string('email')->index();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        /*
+        |--------------------------------------------------------------------------
+        | SESSIONS
+        |--------------------------------------------------------------------------
+        */
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
+
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users', 'id_user')
+                ->nullOnDelete();
+
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');
@@ -38,13 +72,10 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };

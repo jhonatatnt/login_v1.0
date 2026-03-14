@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-
 class UserController extends Controller
 {
     /**
@@ -14,7 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // Exemplo futuro: listar usuários
+        // return view('users.index', ['users' => User::all()]);
     }
 
     /**
@@ -30,37 +30,41 @@ class UserController extends Controller
      */
     public function store(Request $request, User $user)
     {
-        // dd($request->all());
         $validated = $request->validate([
-            'name'=> 'required|min:2|max:200',
-            'last_name'=> 'required|min:2|max:200',
-            'password'=> 'required|min:7|max:300',
-            'email'=> 'required|min:5|max:200|email',
+            'name'      => 'required|min:2|max:200',
+            'lastname'  => 'required|min:2|max:200',
+            'email'     => 'required|min:5|max:200|email',
+            'password'  => 'required|min:7|max:300',
         ]);
 
-        $strongPassword = $user -> validatePassword($validated['password']);
+        // Validação de senha forte (helper custom)
+        $strongPassword = $user->validatePassword($validated['password']);
 
-        try{
-
-            if ($user->where('email', $validated['email'])->exists()){
-                // return 'Usuário já foi cadastrado!';
+        try {
+            // Verifica se o e-mail já existe
+            if (User::where('email', $validated['email'])->exists()) {
                 return back()->withInput()->withErrors([
-                    "email" => "O email já foi cadastrado!"
+                    'email' => 'O e-mail já foi cadastrado!',
                 ]);
-            } else {
-                $user = $user->fill($validated);
-                $user->password = Hash::make($strongPassword);
-                $user->save();
-
-                return back()->with('status', 'Usuário criado com sucesso!');
-                // return 'usuário cadastrado com sucesso!';
             }
-        } catch(\Exception $ex){
-            //{$ex->get_Message()}
-           "Ocorreu algum problema ao realizar a inserção! ";
+
+            // Criação do usuário
+            $user = new User();
+            $user->fill($validated);
+
+            $user->password = Hash::make($strongPassword);
+            $user->confirm_email = 'nao';
+            $user->role_user = 1; // usuário comum
+            $user->date_creation = now();
+
+            $user->save();
+
+            return back()->with('status', 'Usuário criado com sucesso!');
+        } catch (\Exception $ex) {
+            return back()->withErrors([
+                'error' => 'Ocorreu um problema ao criar o usuário.',
+            ]);
         }
-
-
     }
 
     /**
@@ -68,7 +72,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Exemplo:
+        // $user = User::findOrFail($id);
+        // return view('users.show', compact('user'));
     }
 
     /**
@@ -76,7 +82,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Exemplo:
+        // $user = User::findOrFail($id);
+        // return view('users.edit', compact('user'));
     }
 
     /**
@@ -84,7 +92,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Implementação futura
     }
 
     /**
@@ -92,6 +100,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Implementação futura
     }
 }

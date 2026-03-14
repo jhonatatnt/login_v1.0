@@ -1,2 +1,8 @@
 [16-Oct-2025 04:19:41 UTC] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home2/jhona980/public_html/sygest/storage/framework/views/ed4ed062a72541c580bd3cbfdf7001eb.php on line 356
 [16-Oct-2025 04:30:22 UTC] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home2/jhona980/public_html/sygest/storage/framework/views/ed4ed062a72541c580bd3cbfdf7001eb.php on line 200
+[12-Jan-2026 23:29:59 UTC] PHP Fatal error:  Trait "App\Http\Controllers\App\Models\Estrategia" not found in /home2/jhona980/trader.wevcapital.com.br/trader/app/Http/Controllers/EstrategiaController.php on line 11
+[12-Jan-2026 23:30:58 UTC] PHP Fatal error:  Trait "App\Http\Controllers\App\Models\Estrategia" not found in /home2/jhona980/trader.wevcapital.com.br/trader/app/Http/Controllers/EstrategiaController.php on line 11
+[12-Jan-2026 23:40:05 UTC] PHP Fatal error:  Trait "App\Http\Controllers\App\Models\Estrategia" not found in /home2/jhona980/trader.wevcapital.com.br/trader/app/Http/Controllers/EstrategiaController.php on line 11
+[12-Jan-2026 23:40:38 UTC] PHP Fatal error:  Trait "App\Http\Controllers\App\Models\Estrategia" not found in /home2/jhona980/trader.wevcapital.com.br/trader/app/Http/Controllers/EstrategiaController.php on line 11
+[12-Jan-2026 23:41:43 UTC] PHP Fatal error:  Trait "App\Http\Controllers\App\Models\Estrategia" not found in /home2/jhona980/trader.wevcapital.com.br/trader/app/Http/Controllers/EstrategiaController.php on line 11
+[12-Jan-2026 23:43:04 UTC] PHP Fatal error:  Trait "App\Http\Controllers\App\Models\Estrategia" not found in /home2/jhona980/trader.wevcapital.com.br/trader/app/Http/Controllers/EstrategiaController.php on line 12

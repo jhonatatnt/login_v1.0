@@ -15,16 +15,11 @@ class DatabaseSeeder extends Seeder
     {
         $this -> call([
             UserSeeder::class,
-            ContabilSeeder::class,
-            TransPagSeeder::class,
-            TransRecSeeder::class
+            OperadorSeeder::class,
+            ContaSeeder::class,
+            EstrategiaSeeder::class,
+            OrdemSeeder::class,
         ]);
 
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

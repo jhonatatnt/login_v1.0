@@ -2,43 +2,66 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * Senha padrão reutilizável
      */
     protected static ?string $password;
 
     /**
-     * Define the model's default state.
+     * Define o estado padrão do model
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->firstName(),
+            'lastname' => fake()->lastName(),
+
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+
             'password' => static::$password ??= Hash::make('password'),
+
+            // sim / nao
+            'confirm_email' => fake()->randomElement(['sim', 'nao']),
+
+            // 0 = comum | 1 = operador | 2 = admin | 3 = super admin
+            'role_user' => fake()->numberBetween(0, 3),
+
+            // criação automática
+            'date_creation' => now(),
+
             'remember_token' => Str::random(10),
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Usuário com e-mail confirmado
      */
-    public function unverified(): static
+    public function emailConfirmado(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+        return $this->state(fn () => [
+            'confirm_email' => 'sim',
+        ]);
+    }
+
+    /**
+     * Usuário administrador
+     */
+    public function admin(): static
+    {
+        return $this->state(fn () => [
+            'role_user' => 2,
         ]);
     }
 }

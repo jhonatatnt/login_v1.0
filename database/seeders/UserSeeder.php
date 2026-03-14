@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -15,38 +15,16 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => 'Jhonata',
-            'last_name' => 'Silva',
-            'email' => 'jhonata.silva@sygest.com.br',
-            'password' => Hash::make('B3terrab@')
-        ]);
+            'name'           => 'User',
+            'lastname'       => 'Root',
+            'email'          => 'root@email.com.br',
+            'password'       => Hash::make('123123'),
 
-        DB::table('users')->insert([
-            'name' => 'Wanderson',
-            'last_name' => 'Mandu',
-            'email' => 'wanderson.mandu@sygest.com.br',
-            'password' => Hash::make('Mandu@123')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Bruna',
-            'last_name' => 'Samara',
-            'email' => 'bruna.samara@sygest.com.br',
-            'password' => Hash::make('Samara@123')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Vinicius',
-            'last_name' => 'Melo',
-            'email' => 'vinicius.silva@sygest.com.br',
-            'password' => Hash::make('Melo@123')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Vanderson',
-            'last_name' => 'Moura',
-            'email' => 'vanderson.silva@sygest.com.br',
-            'password' => Hash::make('Moura@123')
+            // Campos adicionais da migration
+            'confirm_email'  => 'sim',
+            'role_user'      => 3, // super admin
+            'date_creation'  => now(),
+            'remember_token' => Str::random(10),
         ]);
     }
 }

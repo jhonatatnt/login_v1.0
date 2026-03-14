@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function index(){
         if (auth()->check()) {
-            return redirect()->route('financeiro'); // ou a rota desejada
+            return redirect()->route('home'); // ou a rota desejada
         }
 
         return view('login'); // ou o nome da view de login
@@ -28,7 +28,7 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            return redirect()->route('financeiro');
+            return redirect()->route('home');
         }
         else{
             return back()->withInput()->with('status','Login Inválido!');

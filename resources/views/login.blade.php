@@ -27,10 +27,10 @@
       <button type="submit" class="btn-login">Entrar</button>
 
     </form>
-    <!--<div class="login-footer">
-      <p>NÃ£o tem uma conta? <a href="{{ route('create-account') }}">Criar conta</a></p>
+    <div class="login-footer">
+      <p>N«ªo tem uma conta? <a href="{{ route('create-account') }}">Criar conta</a></p>
       <p><a href="{{route('forgot-password')}}">Esqueceu a senha?</a></p>
-    </div>-->
+    </div>
   </div>
 @endsection
 
